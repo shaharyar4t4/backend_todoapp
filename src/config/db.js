@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
-const connectionString ="";
+const connectionString ="mongodb+srv://shaharyarali209:TJ3IWlwera98wzp@cluster0.xeiij.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const mongoose = async () => {
+const connectDB = async () => {
   try{
     const conn = await mongoose.connect(connectionString,{
         useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false
+        useUnifiedTopology: true
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
