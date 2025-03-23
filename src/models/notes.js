@@ -12,7 +12,7 @@ const noteSchema = new mongoose.Schema(
       required: [true, "Content is required"],
     },
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User", // Reference to the User model
       required: [true, "User ID is required"],
     },
@@ -54,3 +54,4 @@ const noteSchema = new mongoose.Schema(
 
 noteSchema.index({ userId:1, isDeleted:1});
 const Note = mongoose.model("Note", noteSchema);
+module.exports = Note;
