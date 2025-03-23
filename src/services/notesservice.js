@@ -12,5 +12,23 @@ const createNoteAsync = async ({title, content, userId}) => {
     return newNote;
 };
 
-module.exports = {createNoteAsync};
+const getNoteAsync = async () => {
+    return await Note.find();
+}
+
+const getNoteByIdAsync = async (id) => {
+    const note = await Note.findById(id);
+    return note;
+}
+
+const deleteNote = async(id)=>{
+     await Note.findByIdAndDelete(id);
+     return true;
+}
+
+const updateNote = async (id, updateNote)=>{
+    await Note.findOneAndUpdate(id, updateNote);
+    return true;
+}
+module.exports = {createNoteAsync, getNoteAsync, getNoteByIdAsync, deleteNote, updateNote};
 
