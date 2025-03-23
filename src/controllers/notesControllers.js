@@ -1,4 +1,7 @@
 
+// this file will help taken input from user and create a new note
+
+
 const  createNoteAsync = require('../services/notesservice');
 
 const createNote = async (req , res) =>{

@@ -1,3 +1,6 @@
+
+// this file code is help to save the note in the DB
+
 const Note = require("../models/notes");
 
 const createNoteAsync = async ({title, content, userId}) => {
