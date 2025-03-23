@@ -30,22 +30,21 @@ const noteSchema = new mongoose.Schema(
     },
     color: {
       type: String,
-      default: "#FFFFFF", // Optional background color for notes
+      default: "#FFFFFF",
+       validate: {
+        validator: function (v) {
+          return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v);
+        },
+        message: (props) => `${props.value} is not a valid color code!`,
+       } // Optional background color for notes
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false, // Soft delete feature
     },
     attachments: {
       type: [String], // Stores URLs of attached files
       default: [],
-    },
-    collaborators: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User", // Allow multiple users to access/edit the note
-      },
-    ],
-    status: {
-      type: String,
-      enum: ["active", "completed", "deleted"],
-      default: "active",
     },
   },
   {
@@ -53,4 +52,5 @@ const noteSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Note", noteSchema);
+noteSchema.index({ userId:1, isDeleted:1});
+const Note = mongoose.model("Note", noteSchema);
